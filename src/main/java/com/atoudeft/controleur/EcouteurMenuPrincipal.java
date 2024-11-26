@@ -73,7 +73,7 @@ public class EcouteurMenuPrincipal implements ActionListener {
 
                                 estValide = true;
                             } catch (NumberFormatException num) {
-                                JOptionPane.showMessageDialog(fenetre, "Le numero de port etre un entier valide!",
+                                JOptionPane.showMessageDialog(fenetre, "Le numero de port doit etre un entier valide!",
                                         "Erreur", JOptionPane.ERROR_MESSAGE);
                             }
                         } else {

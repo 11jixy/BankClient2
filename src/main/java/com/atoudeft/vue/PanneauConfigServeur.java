@@ -18,26 +18,21 @@ public class PanneauConfigServeur extends JPanel {
     public PanneauConfigServeur(String adr, int port) {
         panneau = new JPanel();
         panneau.setLayout(new GridLayout(2, 1, 5, 5));
-        JPanel panServeur = new JPanel(new BorderLayout());
-        JPanel panPort = new JPanel(new BorderLayout());
 
         txtAdrServeur = new JTextField(adr, 15);
         txtNumPort = new JTextField(String.valueOf(port), 5);
 
         JLabel lblAdrServeur = new JLabel("Adresse IP: ");
+        lblAdrServeur.setHorizontalAlignment(SwingConstants.RIGHT);
         JLabel lblNumPort = new JLabel("Port: ");
+        lblNumPort.setHorizontalAlignment(SwingConstants.RIGHT);
 
-        panServeur.add(lblAdrServeur, BorderLayout.WEST);
-        panServeur.add(txtAdrServeur, BorderLayout.CENTER);
-
-        panPort.add(lblNumPort, BorderLayout.WEST);
-        panPort.add(txtNumPort, BorderLayout.CENTER);
-
-        panneau.add(panServeur);
-        panneau.add(panPort);
+        panneau.add(lblAdrServeur);
+        panneau.add(txtAdrServeur);
+        panneau.add(lblNumPort);
+        panneau.add(txtNumPort);
 
         add(panneau, BorderLayout.CENTER);
-
     }
     public String getAdresseServeur() {
         return txtAdrServeur.getText();

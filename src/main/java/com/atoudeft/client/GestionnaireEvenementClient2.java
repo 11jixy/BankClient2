@@ -83,6 +83,14 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                 case "EPARGNE" :
                     arg = evenement.getArgument();
                     JOptionPane.showMessageDialog(panneauPrincipal,"EPARGNE "+arg);
+                    if (arg.trim().startsWith("NO")) {
+                        JOptionPane.showMessageDialog(panneauPrincipal,"Epargne refusée");
+                    }
+                    else {
+                        str = arg.substring(arg.indexOf("OK")+2).trim();
+                        panneauPrincipal.ajouterCompte(str);
+                        JOptionPane.showMessageDialog(panneauPrincipal, "Compte epargne créé avec succès");
+                    }
                     break;
                 case "SELECT" :
                     arg = evenement.getArgument();

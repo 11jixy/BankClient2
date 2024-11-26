@@ -3,6 +3,7 @@ package com.atoudeft.vue;
 import com.atoudeft.client.Client;
 import com.atoudeft.controleur.EcouteurConnexion;
 import com.atoudeft.controleur.EcouteurListeComptes;
+import com.atoudeft.controleur.EcouteurOperationsCompte;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,11 +31,13 @@ public class PanneauPrincipal  extends JPanel {
 
     public PanneauPrincipal(Client client) {
         this.client = client;
+        EcouteurOperationsCompte opComte = new EcouteurOperationsCompte(client);
 
         panneauConnexion = new PanneauConnexion();
         panneauConnexion.setEcouteur(new EcouteurConnexion(client,panneauConnexion));
 
         panneauOperationsCompte = new PanneauOperationsCompte();
+        panneauOperationsCompte.setEcouteur(opComte);
 
         panneauCompteClient = new JPanel();
 
