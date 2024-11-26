@@ -1,9 +1,9 @@
 package com.atoudeft.controleur;
 
 import com.atoudeft.client.Client;
+import com.atoudeft.vue.PanneauConfigServeur;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -50,8 +50,38 @@ public class EcouteurMenuPrincipal implements ActionListener {
                         client.deconnecter();
                     }
                     break;
+                    //Jiayi Xu
                 case "CONFIGURER":
                     //TODO : compléter (question 1.3)
+                    boolean estValide = false;
+                    String adresse = client.getAdrServeur();
+                    int port = client.getPortServeur();
+
+                    while (!estValide) {
+                        PanneauConfigServeur panneauConfigServeur = new PanneauConfigServeur(adresse, port);
+
+                        res = JOptionPane.showConfirmDialog(fenetre, panneauConfigServeur, "Configuration serveur",
+                                JOptionPane.OK_OPTION);
+                        if (res == JOptionPane.OK_OPTION) {
+                            try {
+
+                                String adresseEntree = panneauConfigServeur.getAdresseServeur();
+                                int portEntre = Integer.parseInt(panneauConfigServeur.getPortServeur());
+
+                                client.setAdrServeur(adresseEntree);
+                                client.setPortServeur(portEntre);
+
+                                estValide = true;
+                            } catch (NumberFormatException num) {
+                                JOptionPane.showMessageDialog(fenetre, "Le numero de port etre un entier valide!",
+                                        "Erreur", JOptionPane.ERROR_MESSAGE);
+                            }
+                        } else {
+                            estValide = true;
+                        }
+
+                    }
+
                     break;
                 case "QUITTER":
                     if (client.isConnecte()) {

@@ -90,6 +90,7 @@ public class MainFrame extends JFrame implements Runnable, Observateur {
     }
 
     @Override
+    //Jiayi Xu
     public void seMettreAJour(Observable observable) {
         if (observable instanceof Client) {
             Client client = (Client)observable;
