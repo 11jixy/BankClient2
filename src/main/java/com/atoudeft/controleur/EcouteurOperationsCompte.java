@@ -28,6 +28,34 @@ public class EcouteurOperationsCompte implements ActionListener {
                         client.envoyer("EPARGNE");
                     }
                     break;
+                case "DEPOT":
+                    if (!client.isConnecte()) {
+                        JOptionPane.showMessageDialog(null, "Le depot a echoue");
+                    } else {
+                        client.envoyer("DEPOT");
+                    }
+                    break;
+                case "RETRAIT":
+                    if (!client.isConnecte()) {
+                        JOptionPane.showMessageDialog(null, "Le retrait a echoue");
+                    } else {
+                        client.envoyer("RETRAIT");
+                    }
+                    break;
+                case "TRANSFER":
+                    if (!client.isConnecte()) {
+                        JOptionPane.showMessageDialog(null, "Le transfert a echoue");
+                    } else {
+                        client.envoyer("TRANSFER");
+                    }
+                    break;
+                case "FACTURE":
+                    if (!client.isConnecte()) {
+                        JOptionPane.showMessageDialog(null, "La facture a echoue");
+                    } else {
+                        client.envoyer("FACTURE");
+                    }
+                    break;
             }
         }
         //à compléter :
