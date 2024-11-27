@@ -40,7 +40,6 @@ public class PanneauPrincipal  extends JPanel {
         panneauOperationsCompte.setEcouteur(opComte);
 
         panneauCompteClient = new JPanel();
-
         panneauCompteClient.setLayout(new BorderLayout());
         panneauCompteClient.setBackground(Color.WHITE);
         panneauOperationsCompte.setBackground(Color.WHITE);
@@ -56,13 +55,18 @@ public class PanneauPrincipal  extends JPanel {
         panneauCompteClient.add(panneauOperationsCompte, BorderLayout.NORTH);
         panneauCompteClient.add(jlNumerosComptes, BorderLayout.WEST);
         //Enregistrement de l'écouteur de souris:
-        jlNumerosComptes.addMouseListener(new EcouteurListeComptes(client));
+        jlNumerosComptes.addMouseListener(new EcouteurListeComptes(client, panneauOperationsCompte));
 
         this.setLayout(new BorderLayout());
 
         this.add(panneauConnexion, BorderLayout.NORTH);
         this.add(panneauCompteClient, BorderLayout.CENTER);
         panneauCompteClient.setVisible(false);
+    }
+
+    //Jiayi Xu
+    public PanneauOperationsCompte getPanneauOperationsCompte() {
+        return this.panneauOperationsCompte;
     }
 
     /**

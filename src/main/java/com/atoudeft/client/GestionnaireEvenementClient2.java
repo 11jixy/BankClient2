@@ -94,7 +94,20 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     break;
                 case "SELECT" :
                     arg = evenement.getArgument();
+                    System.out.println("Réponse du serveur reçue: " + arg);
                     JOptionPane.showMessageDialog(panneauPrincipal,"SELECT "+arg);
+                    if (arg.trim().startsWith("NO")) {
+                        JOptionPane.showMessageDialog(panneauPrincipal,"Selection refusée");
+                    }
+                    else if (arg.trim().startsWith("OK")) {
+
+                        t = arg.split(" ");
+                        if (t.length >= 3) {
+                            String solde = t[3];
+                            System.out.println("Solde reçu : " + solde);
+                            panneauPrincipal.getPanneauOperationsCompte().setSolde(solde);
+                        }
+                    }
                     break;
 
                 /******************* OPÉRATIONS BANCAIRES *******************/
