@@ -23,6 +23,7 @@ public class EcouteurListeComptes extends MouseAdapter {
         this.panOpCompte = panOpCompte;
     }
 
+    //Jiayi Xu
     @Override
     public void mouseClicked(MouseEvent evt) {
        Object source = evt.getSource();
@@ -31,10 +32,14 @@ public class EcouteurListeComptes extends MouseAdapter {
         if (evt.getClickCount() == 2) {
             if (source instanceof JList) {
                 action = (String) ((JList) source).getSelectedValue();
-
                 if (action != null) {
-                    client.envoyer("SELECT " + action);
-                    System.out.println("Select envoye avec " + action);
+                    if (action.contains("EPARGNE")) {
+                        client.envoyer("SELECT epargne");
+                        System.out.println("Select envoye avec " + action);
+                    } else if (action.contains("CHEQUE")) {
+                        client.envoyer("SELECT cheque");
+                        System.out.println("Select envoye avec " + action);
+                    }
                 }
             }
         }
