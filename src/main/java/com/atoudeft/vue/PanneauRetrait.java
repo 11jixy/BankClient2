@@ -6,10 +6,10 @@ public class PanneauRetrait extends JPanel {
     private JTextField txtRetrait;
     private JPanel panneau;
 
-    public PanneauRetrait(double montant) {
+    public PanneauRetrait() {
         panneau = new JPanel();
 
-        txtRetrait = new JTextField(String.valueOf(montant), 15);
+        txtRetrait = new JTextField(15);
         JLabel lblDepot = new JLabel("Retrait: ");
         lblDepot.setHorizontalAlignment(SwingConstants.RIGHT);
 

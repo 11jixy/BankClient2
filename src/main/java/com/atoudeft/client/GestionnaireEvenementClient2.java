@@ -101,7 +101,6 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     } else if (arg.trim().startsWith("OK")) {
                         t = arg.split(" ");
                         String solde = t[2];
-                        panneauPrincipal.getPanneauOperationsCompte().setSolde(solde);
                     }
                     break;
 
@@ -109,6 +108,12 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                 case "DEPOT":
                     arg = evenement.getArgument();
                     JOptionPane.showMessageDialog(panneauPrincipal, "DEPOT " + arg);
+                    if (arg.trim().startsWith("NO")) {
+                        JOptionPane.showMessageDialog(panneauPrincipal, "Depot refusee");
+                    } else if (arg.trim().startsWith("OK")) {
+                        t = arg.split(" ");
+                        String depot = t[1];
+                    }
                     break;
                 case "RETRAIT":
                     arg = evenement.getArgument();

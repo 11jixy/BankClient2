@@ -11,10 +11,10 @@ public class PanneauDepot extends JPanel {
     private JTextField txtDepot;
     private JPanel panneau;
 
-    public PanneauDepot(double montant) {
+    public PanneauDepot() {
         panneau = new JPanel();
 
-        txtDepot = new JTextField(String.valueOf(montant), 15);
+        txtDepot = new JTextField(15);
         JLabel lblDepot = new JLabel("Depot: ");
         lblDepot.setHorizontalAlignment(SwingConstants.RIGHT);
 

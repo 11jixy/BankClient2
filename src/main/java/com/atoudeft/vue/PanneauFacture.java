@@ -7,13 +7,13 @@ public class PanneauFacture extends JPanel {
     private JTextField txtMontant, txtNumFacture, txtDescription;
     JPanel panneau;
 
-    public PanneauFacture(double montant, int numFacture, String description) {
+    public PanneauFacture() {
         panneau = new JPanel();
         panneau.setLayout(new GridLayout(3, 1, 5, 5));
 
-        txtMontant = new JTextField(String.valueOf(montant), 10);
-        txtNumFacture = new JTextField(String.valueOf(numFacture), 10);
-        txtDescription = new JTextField(description, 20);
+        txtMontant = new JTextField(10);
+        txtNumFacture = new JTextField(10);
+        txtDescription = new JTextField(20);
 
         JLabel lblMontant = new JLabel("Montant: ");
         lblMontant.setHorizontalAlignment(SwingConstants.RIGHT);

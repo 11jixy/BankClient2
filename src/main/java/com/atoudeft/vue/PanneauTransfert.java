@@ -7,12 +7,12 @@ public class PanneauTransfert extends JPanel {
     private JTextField txtTransfert, txtNumDestinataire;
     JPanel panneau;
 
-    public PanneauTransfert(double montant, int numDestinataire) {
+    public PanneauTransfert() {
         panneau = new JPanel();
         panneau.setLayout(new GridLayout(2, 1, 5, 5));
 
-        txtTransfert = new JTextField(String.valueOf(montant), 15);
-        txtNumDestinataire = new JTextField(String.valueOf(numDestinataire), 15);
+        txtTransfert = new JTextField(15);
+        txtNumDestinataire = new JTextField(15);
 
         JLabel lblTransfert = new JLabel("Transfert: ");
         lblTransfert.setHorizontalAlignment(SwingConstants.RIGHT);
