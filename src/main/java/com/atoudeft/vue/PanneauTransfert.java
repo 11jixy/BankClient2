@@ -5,7 +5,8 @@ import java.awt.*;
 
 public class PanneauTransfert extends JPanel {
     private JTextField txtTransfert, txtNumDestinataire;
-    JPanel panneau;
+    private JPanel panneau;
+    private JButton btnTransfert;
 
     public PanneauTransfert() {
         panneau = new JPanel();

@@ -1,6 +1,7 @@
 package com.atoudeft.controleur;
 
 import com.atoudeft.client.Client;
+import com.atoudeft.vue.PanneauPrincipal;
 import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
@@ -9,10 +10,9 @@ import java.awt.event.ActionListener;
 
 public class EcouteurOperationsCompte implements ActionListener {
     private Client client;
+    private PanneauPrincipal panneauPrincipal;
 
-    public EcouteurOperationsCompte(Client client) {
-        this.client = client;
-    }
+    public EcouteurOperationsCompte(Client client) { this.client = client; }
 
     @Override
     public void actionPerformed(ActionEvent e) {

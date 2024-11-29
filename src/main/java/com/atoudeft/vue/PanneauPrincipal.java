@@ -24,6 +24,11 @@ public class PanneauPrincipal  extends JPanel {
     private JPanel panneauCompteClient;
     private PanneauOperationsCompte panneauOperationsCompte;
 
+    private PanneauDepot panneauDepot;
+    private PanneauRetrait panneauRetrait;
+    private PanneauFacture panneauFacture;
+    private PanneauTransfert panneauTransfert;
+
     private DefaultListModel<String> numerosComptes;
     private JList<String> jlNumerosComptes;
     private JDesktopPane bureau;
@@ -35,6 +40,11 @@ public class PanneauPrincipal  extends JPanel {
 
         panneauConnexion = new PanneauConnexion();
         panneauConnexion.setEcouteur(new EcouteurConnexion(client,panneauConnexion));
+
+        panneauDepot = new PanneauDepot();
+        panneauFacture = new PanneauFacture();
+        panneauRetrait = new PanneauRetrait();
+        panneauTransfert = new PanneauTransfert();
 
         panneauOperationsCompte = new PanneauOperationsCompte();
         panneauOperationsCompte.setEcouteur(opComte);
@@ -62,6 +72,10 @@ public class PanneauPrincipal  extends JPanel {
         this.add(panneauConnexion, BorderLayout.NORTH);
         this.add(panneauCompteClient, BorderLayout.CENTER);
         panneauCompteClient.setVisible(false);
+        panneauTransfert.setVisible(false);
+        panneauFacture.setVisible(false);
+        panneauDepot.setVisible(false);
+        panneauRetrait.setVisible(false);
     }
 
     //Jiayi Xu
@@ -97,5 +111,28 @@ public class PanneauPrincipal  extends JPanel {
      */
     public void ajouterCompte(String str) {
         numerosComptes.addElement(str);
+    }
+
+    //Alejandro
+    public void montrerPanneaux(String panneau) {
+        panneauTransfert.setVisible(false);
+        panneauFacture.setVisible(false);
+        panneauDepot.setVisible(false);
+        panneauRetrait.setVisible(false);
+
+        switch (panneau) {
+            case "DEPOT":
+                panneauDepot.setVisible(true);
+                break;
+            case "RETRAIT":
+                panneauRetrait.setVisible(true);
+                break;
+            case "TRANSFER":
+                panneauTransfert.setVisible(true);
+                break;
+            case "FACTURE":
+                panneauFacture.setVisible(true);
+                break;
+        }
     }
 }

@@ -10,6 +10,7 @@ import javax.swing.*;
 public class PanneauDepot extends JPanel {
     private JTextField txtDepot;
     private JPanel panneau;
+    private JButton btnDepot;
 
     public PanneauDepot() {
         panneau = new JPanel();

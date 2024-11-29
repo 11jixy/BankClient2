@@ -5,6 +5,7 @@ import javax.swing.*;
 public class PanneauRetrait extends JPanel {
     private JTextField txtRetrait;
     private JPanel panneau;
+    private JButton btnRetrait;
 
     public PanneauRetrait() {
         panneau = new JPanel();

@@ -5,7 +5,9 @@ import java.awt.*;
 
 public class PanneauFacture extends JPanel {
     private JTextField txtMontant, txtNumFacture, txtDescription;
-    JPanel panneau;
+    private JPanel panneau;
+    private JButton btnFacture;
+
 
     public PanneauFacture() {
         panneau = new JPanel();
