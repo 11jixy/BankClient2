@@ -1,29 +1,38 @@
 package com.atoudeft.vue;
 
-import javax.swing.*;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
-/**
- *
- * @author Alejandro Rojas
- *
- */
 public class PanneauDepot extends JPanel {
-    private JTextField txtDepot;
-    private JPanel panneau;
+    private JTextField txtDepot = new JTextField(15);
+    private JPanel panneau = new JPanel();
     private JButton btnDepot;
 
     public PanneauDepot() {
-        panneau = new JPanel();
-
-        txtDepot = new JTextField(15);
         JLabel lblDepot = new JLabel("Depot: ");
-        lblDepot.setHorizontalAlignment(SwingConstants.RIGHT);
-
-        panneau.add(lblDepot);
-        panneau.add(txtDepot);
-
-        add(panneau);
-
+        lblDepot.setHorizontalAlignment(4);
+        this.btnDepot = new JButton("Effectuer le dépôt!");
+        this.panneau.add(lblDepot);
+        this.panneau.add(this.txtDepot);
+        this.panneau.add(new JLabel());
+        this.panneau.add(this.btnDepot);
+        this.add(this.panneau, "Center");
     }
-    public double getDepot() { return Double.parseDouble(txtDepot.getText()); }
+
+    public double getDepot() {
+        try {
+            return Double.parseDouble(this.txtDepot.getText());
+        } catch (NumberFormatException var2) {
+            JOptionPane.showMessageDialog(this, "Veuillez entrer un montant valide", "Erreur", 0);
+            return 0.0;
+        }
+    }
+
+    public void setEcouteur(ActionListener ecouteur) {
+        this.btnDepot.addActionListener(ecouteur);
+    }
 }

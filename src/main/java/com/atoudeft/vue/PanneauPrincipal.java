@@ -4,135 +4,77 @@ import com.atoudeft.client.Client;
 import com.atoudeft.controleur.EcouteurConnexion;
 import com.atoudeft.controleur.EcouteurListeComptes;
 import com.atoudeft.controleur.EcouteurOperationsCompte;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
+import javax.swing.JDesktopPane;
+import javax.swing.JList;
+import javax.swing.JPanel;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Vector;
-
-/**
- *
- * @author Abdelmoumène Toudeft (Abdelmoumene.Toudeft@etsmtl.ca)
- * @version 1.0
- * @since 2024-11-01
- */
-public class PanneauPrincipal  extends JPanel {
+public class PanneauPrincipal extends JPanel {
     private Client client;
     private PanneauConnexion panneauConnexion;
     private JPanel panneauCompteClient;
     private PanneauOperationsCompte panneauOperationsCompte;
-
-    private PanneauDepot panneauDepot;
-    private PanneauRetrait panneauRetrait;
-    private PanneauFacture panneauFacture;
-    private PanneauTransfert panneauTransfert;
-
     private DefaultListModel<String> numerosComptes;
     private JList<String> jlNumerosComptes;
     private JDesktopPane bureau;
 
-
     public PanneauPrincipal(Client client) {
         this.client = client;
         EcouteurOperationsCompte opComte = new EcouteurOperationsCompte(client);
-
-        panneauConnexion = new PanneauConnexion();
-        panneauConnexion.setEcouteur(new EcouteurConnexion(client,panneauConnexion));
-
-        panneauDepot = new PanneauDepot();
-        panneauFacture = new PanneauFacture();
-        panneauRetrait = new PanneauRetrait();
-        panneauTransfert = new PanneauTransfert();
-
-        panneauOperationsCompte = new PanneauOperationsCompte();
-        panneauOperationsCompte.setEcouteur(opComte);
-
-        panneauCompteClient = new JPanel();
-        panneauCompteClient.setLayout(new BorderLayout());
-        panneauCompteClient.setBackground(Color.WHITE);
-        panneauOperationsCompte.setBackground(Color.WHITE);
-
-        numerosComptes = new DefaultListModel<>();
-
-        jlNumerosComptes = new JList<>(numerosComptes);
-        jlNumerosComptes.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
-        jlNumerosComptes.setBorder(BorderFactory.createTitledBorder("Comptes bancaires"));
-        jlNumerosComptes.setPreferredSize(new Dimension(250,500));
-
-
-        panneauCompteClient.add(panneauOperationsCompte, BorderLayout.NORTH);
-        panneauCompteClient.add(jlNumerosComptes, BorderLayout.WEST);
-        //Enregistrement de l'écouteur de souris:
-        jlNumerosComptes.addMouseListener(new EcouteurListeComptes(client, panneauOperationsCompte));
-
+        this.panneauConnexion = new PanneauConnexion();
+        this.panneauConnexion.setEcouteur(new EcouteurConnexion(client, this.panneauConnexion));
+        this.panneauOperationsCompte = new PanneauOperationsCompte();
+        this.panneauOperationsCompte.setEcouteur(opComte);
+        this.panneauCompteClient = new JPanel();
+        this.panneauCompteClient.setLayout(new BorderLayout());
+        this.panneauCompteClient.setBackground(Color.WHITE);
+        this.panneauOperationsCompte.setBackground(Color.WHITE);
+        this.numerosComptes = new DefaultListModel();
+        this.jlNumerosComptes = new JList(this.numerosComptes);
+        this.jlNumerosComptes.setSelectionMode(0);
+        this.jlNumerosComptes.setBorder(BorderFactory.createTitledBorder("Comptes bancaires"));
+        this.jlNumerosComptes.setPreferredSize(new Dimension(250, 500));
+        this.panneauCompteClient.add(this.panneauOperationsCompte, "North");
+        this.panneauCompteClient.add(this.jlNumerosComptes, "West");
+        this.jlNumerosComptes.addMouseListener(new EcouteurListeComptes(client, this.panneauOperationsCompte));
         this.setLayout(new BorderLayout());
-
-        this.add(panneauConnexion, BorderLayout.NORTH);
-        this.add(panneauCompteClient, BorderLayout.CENTER);
-        panneauCompteClient.setVisible(false);
-        panneauTransfert.setVisible(false);
-        panneauFacture.setVisible(false);
-        panneauDepot.setVisible(false);
-        panneauRetrait.setVisible(false);
+        this.add(this.panneauConnexion, "North");
+        this.add(this.panneauCompteClient, "Center");
+        this.panneauCompteClient.setVisible(false);
     }
 
-    //Jiayi Xu
     public PanneauOperationsCompte getPanneauOperationsCompte() {
         return this.panneauOperationsCompte;
     }
 
-    /**
-     * Vide les éléments d'interface du panneauPrincipal.
-     */
     public void vider() {
         this.numerosComptes.clear();
         this.bureau.removeAll();
     }
+
     public void cacherPanneauConnexion() {
-        panneauConnexion.effacer();
-        panneauConnexion.setVisible(false);
+        this.panneauConnexion.effacer();
+        this.panneauConnexion.setVisible(false);
     }
+
     public void montrerPanneauConnexion() {
-        panneauConnexion.setVisible(true);
+        this.panneauConnexion.setVisible(true);
     }
+
     public void cacherPanneauCompteClient() {
-        panneauCompteClient.setVisible(false);
+        this.panneauCompteClient.setVisible(false);
         this.numerosComptes.clear();
     }
+
     public void montrerPanneauCompteClient() {
-        panneauCompteClient.setVisible(true);
+        this.panneauCompteClient.setVisible(true);
     }
-    /**
-     * Affiche un numéro de compte dans le JList des comptes.
-     *
-     * @param str chaine contenant le numéros de compte
-     */
+
     public void ajouterCompte(String str) {
-        numerosComptes.addElement(str);
-    }
-
-    //Alejandro
-    public void montrerPanneaux(String panneau) {
-        panneauTransfert.setVisible(false);
-        panneauFacture.setVisible(false);
-        panneauDepot.setVisible(false);
-        panneauRetrait.setVisible(false);
-
-        switch (panneau) {
-            case "DEPOT":
-                panneauDepot.setVisible(true);
-                break;
-            case "RETRAIT":
-                panneauRetrait.setVisible(true);
-                break;
-            case "TRANSFER":
-                panneauTransfert.setVisible(true);
-                break;
-            case "FACTURE":
-                panneauFacture.setVisible(true);
-                break;
-        }
+        this.numerosComptes.addElement(str);
     }
 }

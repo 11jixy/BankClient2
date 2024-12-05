@@ -5,132 +5,155 @@ import com.atoudeft.commun.evenement.GestionnaireEvenement;
 import com.atoudeft.commun.net.Connexion;
 import com.atoudeft.vue.PanneauPrincipal;
 import com.programmes.MainFrame;
-
-import javax.swing.*;
+import java.awt.Dimension;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
     private Client client;
     private PanneauPrincipal panneauPrincipal;
 
-    /**
-     * Construit un gestionnaire d'événements pour un client.
-     *
-     * @param client Client Le client pour lequel ce gestionnaire gère des événements
-     */
     public GestionnaireEvenementClient2(Client client, PanneauPrincipal panneauPrincipal) {
-
         this.client = client;
         this.panneauPrincipal = panneauPrincipal;
         this.client.setGestionnaireEvenement(this);
     }
 
-    @Override
     public void traiter(Evenement evenement) {
         Object source = evenement.getSource();
-        //Connexion cnx;
-        String typeEvenement, arg, str;
-        int i;
-        String[] t;
-        MainFrame fenetre;
-
         if (source instanceof Connexion) {
-            //cnx = (Connexion) source;
-            typeEvenement = evenement.getType();
-            switch (typeEvenement) {
-                /******************* COMMANDES GÉNÉRALES *******************/
-                case "END": //Le serveur demande de fermer la connexion
-                    client.deconnecter(); //On ferme la connexion
+            String arg;
+            String str;
+            String[] t;
+            String solde;
+            switch (evenement.getType()) {
+                case "END":
+                    this.client.deconnecter();
                     break;
-                /******************* CREATION et CONNEXION *******************/
-//                case "HIST": //Le serveur a renvoyé
-//                    panneauPrincipal.setVisible(true);
-//                    JOptionPane.showMessageDialog(null,"Panneau visible");
-//                    cnx.envoyer("LIST");
-//                    arg = evenement.getArgument();
-//                    break;
+                case "HIST":
+                    arg = evenement.getArgument();
+                    if (arg.trim().startsWith("NO")) {
+                        JOptionPane.showMessageDialog(this.panneauPrincipal, "Historique refusé");
+                    } else {
+                        JTextArea textArea = new JTextArea(arg);
+                        textArea.setEditable(false);
+                        JScrollPane scrollPane = new JScrollPane(textArea);
+                        scrollPane.setPreferredSize(new Dimension(400, 300));
+                        JOptionPane.showMessageDialog(this.panneauPrincipal, scrollPane, "Historique des opérations", 1);
+                    }
+                    break;
                 case "OK":
-                    panneauPrincipal.setVisible(true);
-                    fenetre = (MainFrame) panneauPrincipal.getTopLevelAncestor();
-                    fenetre.setTitle(MainFrame.TITRE);//+" - Connecté"
+                    this.panneauPrincipal.setVisible(true);
+                    MainFrame fenetre = (MainFrame)this.panneauPrincipal.getTopLevelAncestor();
+                    fenetre.setTitle("BankEts - Client");
                     break;
                 case "NOUVEAU":
                     arg = evenement.getArgument();
                     if (arg.trim().startsWith("NO")) {
-                        JOptionPane.showMessageDialog(panneauPrincipal, "Nouveau refusé");
+                        JOptionPane.showMessageDialog(this.panneauPrincipal, "Nouveau refusé");
                     } else {
-                        panneauPrincipal.cacherPanneauConnexion();
-                        panneauPrincipal.montrerPanneauCompteClient();
+                        this.panneauPrincipal.cacherPanneauConnexion();
+                        this.panneauPrincipal.montrerPanneauCompteClient();
                         str = arg.substring(arg.indexOf("OK") + 2).trim();
-                        panneauPrincipal.ajouterCompte(str);
+                        this.panneauPrincipal.ajouterCompte(str);
                     }
                     break;
                 case "CONNECT":
                     arg = evenement.getArgument();
                     if (arg.trim().startsWith("NO")) {
-                        JOptionPane.showMessageDialog(panneauPrincipal, "Connexion refusée");
+                        JOptionPane.showMessageDialog(this.panneauPrincipal, "Connexion refusée");
+                        break;
                     } else {
-                        panneauPrincipal.cacherPanneauConnexion();
-                        panneauPrincipal.montrerPanneauCompteClient();
+                        this.panneauPrincipal.cacherPanneauConnexion();
+                        this.panneauPrincipal.montrerPanneauCompteClient();
                         str = arg.substring(arg.indexOf("OK") + 2).trim();
                         t = str.split(":");
-                        for (String s : t) {
-                            panneauPrincipal.ajouterCompte(s.substring(0, s.indexOf("]") + 1));
+                        String[] var16 = t;
+                        int var12 = t.length;
+
+                        for(int var13 = 0; var13 < var12; ++var13) {
+                            String s = var16[var13];
+                            this.panneauPrincipal.ajouterCompte(s.substring(0, s.indexOf("]") + 1));
                         }
+
+                        return;
                     }
-                    break;
-                /******************* SÉLECTION DE COMPTES *******************/
-                //Jiayi Xu
                 case "EPARGNE":
                     arg = evenement.getArgument();
-                    JOptionPane.showMessageDialog(panneauPrincipal, "EPARGNE " + arg);
+                    JOptionPane.showMessageDialog(this.panneauPrincipal, "EPARGNE " + arg);
                     if (arg.trim().startsWith("NO")) {
-                        JOptionPane.showMessageDialog(panneauPrincipal, "Epargne refusée");
+                        JOptionPane.showMessageDialog(this.panneauPrincipal, "Epargne refusée");
                     } else {
                         str = arg.substring(arg.indexOf("OK") + 2).trim();
-                        panneauPrincipal.ajouterCompte(str);
-                        JOptionPane.showMessageDialog(panneauPrincipal, "Compte epargne créé avec succès");
+                        this.panneauPrincipal.ajouterCompte(str);
+                        JOptionPane.showMessageDialog(this.panneauPrincipal, "Compte epargne créé avec succès");
                     }
                     break;
-                    //Jiayi Xu
                 case "SELECT":
                     arg = evenement.getArgument();
                     System.out.println("Réponse du serveur reçue: " + arg);
-                    JOptionPane.showMessageDialog(panneauPrincipal, "SELECT " + arg);
+                    JOptionPane.showMessageDialog(this.panneauPrincipal, "SELECT " + arg);
                     if (arg.trim().startsWith("NO")) {
-                        JOptionPane.showMessageDialog(panneauPrincipal, "Selection refusée");
+                        JOptionPane.showMessageDialog(this.panneauPrincipal, "Selection refusée");
                     } else if (arg.trim().startsWith("OK")) {
                         t = arg.split(" ");
-                        String solde = t[2];
+                        solde = t[2];
+                        this.panneauPrincipal.getPanneauOperationsCompte().setSolde(solde);
                     }
                     break;
-
-                /******************* OPÉRATIONS BANCAIRES *******************/
                 case "DEPOT":
                     arg = evenement.getArgument();
-                    JOptionPane.showMessageDialog(panneauPrincipal, "DEPOT " + arg);
+                    JOptionPane.showMessageDialog(this.panneauPrincipal, "DEPOT " + arg);
                     if (arg.trim().startsWith("NO")) {
-                        JOptionPane.showMessageDialog(panneauPrincipal, "Depot refusee");
+                        JOptionPane.showMessageDialog(this.panneauPrincipal, "Depot refusé");
                     } else if (arg.trim().startsWith("OK")) {
                         t = arg.split(" ");
-                        String depot = t[1];
+                        solde = t[1];
+                        this.panneauPrincipal.getPanneauOperationsCompte().setSolde(solde);
+                        JOptionPane.showMessageDialog(this.panneauPrincipal, "Depot effectué avec succès. \nNouveau solde: " + solde);
                     }
                     break;
                 case "RETRAIT":
                     arg = evenement.getArgument();
-                    JOptionPane.showMessageDialog(panneauPrincipal, "RETRAIT " + arg);
+                    JOptionPane.showMessageDialog(this.panneauPrincipal, "RETRAIT " + arg);
+                    if (arg.trim().startsWith("NO")) {
+                        JOptionPane.showMessageDialog(this.panneauPrincipal, "Retrait refusé");
+                    } else if (arg.trim().startsWith("OK")) {
+                        t = arg.split(" ");
+                        solde = t[1];
+                        this.panneauPrincipal.getPanneauOperationsCompte().setSolde(solde);
+                        JOptionPane.showMessageDialog(this.panneauPrincipal, "Retrait effectué avec succès. \nNouveau solde: " + solde);
+                    }
                     break;
                 case "FACTURE":
                     arg = evenement.getArgument();
-                    JOptionPane.showMessageDialog(panneauPrincipal, "FACTURE" + arg);
+                    JOptionPane.showMessageDialog(this.panneauPrincipal, "FACTURE" + arg);
+                    if (arg.trim().startsWith("NO")) {
+                        JOptionPane.showMessageDialog(this.panneauPrincipal, "Facture refusée");
+                    } else if (arg.trim().startsWith("OK")) {
+                        t = arg.split(" ");
+                        solde = t[1];
+                        this.panneauPrincipal.getPanneauOperationsCompte().setSolde(solde);
+                        JOptionPane.showMessageDialog(this.panneauPrincipal, "Facture payée avec succès. \nNouveau solde: " + solde);
+                    }
                     break;
                 case "TRANSFER":
                     arg = evenement.getArgument();
-                    JOptionPane.showMessageDialog(panneauPrincipal, "TRANSFER " + arg);
+                    JOptionPane.showMessageDialog(this.panneauPrincipal, "TRANSFER " + arg);
+                    if (arg.trim().startsWith("NO")) {
+                        JOptionPane.showMessageDialog(this.panneauPrincipal, "Transfer refusé");
+                    } else if (arg.trim().startsWith("OK")) {
+                        t = arg.split(" ");
+                        solde = t[1];
+                        this.panneauPrincipal.getPanneauOperationsCompte().setSolde(solde);
+                        JOptionPane.showMessageDialog(this.panneauPrincipal, "Transfer effectué avec succès. \nNouveau solde: " + solde);
+                    }
                     break;
-                /******************* TRAITEMENT PAR DÉFAUT *******************/
                 default:
                     System.out.println("RECU : " + evenement.getType() + " " + evenement.getArgument());
             }
         }
+
     }
 }
