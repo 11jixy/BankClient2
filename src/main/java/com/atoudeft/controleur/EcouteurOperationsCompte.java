@@ -33,7 +33,7 @@ public class EcouteurOperationsCompte implements ActionListener {
                     if (!this.client.isConnecte()) {
                         JOptionPane.showMessageDialog((Component)null, "Le depot a echoue");
                     } else {
-                        System.out.println(nomAction);
+                        //System.out.println(nomAction);
                         final PanneauDepot panneauDepot = new PanneauDepot();
                         panneauDepot.setEcouteur(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
@@ -51,7 +51,7 @@ public class EcouteurOperationsCompte implements ActionListener {
                     if (!this.client.isConnecte()) {
                         JOptionPane.showMessageDialog((Component)null, "Le retrait a echoue");
                     } else {
-                        System.out.println(nomAction);
+                        //System.out.println(nomAction);
                         final PanneauRetrait panneauRetrait = new PanneauRetrait();
                         panneauRetrait.setEcouteur(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
@@ -69,7 +69,7 @@ public class EcouteurOperationsCompte implements ActionListener {
                     if (!this.client.isConnecte()) {
                         JOptionPane.showMessageDialog((Component)null, "Le transfert a echoue");
                     } else {
-                        System.out.println(nomAction);
+                        //System.out.println(nomAction);
                         final PanneauTransfert panneauTransfert = new PanneauTransfert();
                         panneauTransfert.setEcouteur(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
@@ -89,7 +89,7 @@ public class EcouteurOperationsCompte implements ActionListener {
                     if (!this.client.isConnecte()) {
                         JOptionPane.showMessageDialog((Component)null, "La facture a echoue");
                     } else {
-                        System.out.println(nomAction);
+                        //System.out.println(nomAction);
                         final PanneauFacture panneauFacture = new PanneauFacture();
                         panneauFacture.setEcouteur(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
