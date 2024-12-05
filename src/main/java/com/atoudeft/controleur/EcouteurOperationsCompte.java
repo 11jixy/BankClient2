@@ -5,6 +5,7 @@ import com.atoudeft.vue.PanneauDepot;
 import com.atoudeft.vue.PanneauFacture;
 import com.atoudeft.vue.PanneauRetrait;
 import com.atoudeft.vue.PanneauTransfert;
+
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,23 +19,23 @@ public class EcouteurOperationsCompte implements ActionListener {
         this.client = client;
     }
 
+    //Alejandro Rojas
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source instanceof JButton) {
-            switch (((JButton)source).getActionCommand()) {
+            switch (((JButton) source).getActionCommand()) {
                 case "EPARGNE":
                     if (!this.client.isConnecte()) {
-                        JOptionPane.showMessageDialog((Component)null, "L'operation a echoue");
+                        JOptionPane.showMessageDialog((Component) null, "L'operation a echoue");
                     } else {
                         this.client.envoyer("EPARGNE");
                     }
                     break;
                 case "DEPOT":
                     if (!this.client.isConnecte()) {
-                        JOptionPane.showMessageDialog((Component)null, "Le depot a echoue");
+                        JOptionPane.showMessageDialog((Component) null, "Le depot a echoue");
                     } else {
-                        //System.out.println(nomAction);
-                        final PanneauDepot panneauDepot = new PanneauDepot();
+                        PanneauDepot panneauDepot = new PanneauDepot();
                         panneauDepot.setEcouteur(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
                                 double montant = panneauDepot.getDepot();
@@ -44,15 +45,14 @@ public class EcouteurOperationsCompte implements ActionListener {
 
                             }
                         });
-                        JOptionPane.showMessageDialog((Component)null, panneauDepot, "Faire un dépot", 1);
+                        JOptionPane.showMessageDialog((Component) null, panneauDepot, "Faire un dépot", 1);
                     }
                     break;
                 case "RETRAIT":
                     if (!this.client.isConnecte()) {
-                        JOptionPane.showMessageDialog((Component)null, "Le retrait a echoue");
+                        JOptionPane.showMessageDialog((Component) null, "Le retrait a echoue");
                     } else {
-                        //System.out.println(nomAction);
-                        final PanneauRetrait panneauRetrait = new PanneauRetrait();
+                        PanneauRetrait panneauRetrait = new PanneauRetrait();
                         panneauRetrait.setEcouteur(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
                                 double montant = panneauRetrait.getRetrait();
@@ -62,15 +62,14 @@ public class EcouteurOperationsCompte implements ActionListener {
 
                             }
                         });
-                        JOptionPane.showMessageDialog((Component)null, panneauRetrait, "Faire un retrait", 1);
+                        JOptionPane.showMessageDialog((Component) null, panneauRetrait, "Faire un retrait", 1);
                     }
                     break;
                 case "TRANSFER":
                     if (!this.client.isConnecte()) {
-                        JOptionPane.showMessageDialog((Component)null, "Le transfert a echoue");
+                        JOptionPane.showMessageDialog((Component) null, "Le transfert a echoue");
                     } else {
-                        //System.out.println(nomAction);
-                        final PanneauTransfert panneauTransfert = new PanneauTransfert();
+                        PanneauTransfert panneauTransfert = new PanneauTransfert();
                         panneauTransfert.setEcouteur(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
                                 double montant = panneauTransfert.getTransfer();
@@ -82,15 +81,14 @@ public class EcouteurOperationsCompte implements ActionListener {
 
                             }
                         });
-                        JOptionPane.showMessageDialog((Component)null, panneauTransfert, "Faire un transfer", 1);
+                        JOptionPane.showMessageDialog((Component) null, panneauTransfert, "Faire un transfer", 1);
                     }
                     break;
                 case "FACTURE":
                     if (!this.client.isConnecte()) {
-                        JOptionPane.showMessageDialog((Component)null, "La facture a echoue");
+                        JOptionPane.showMessageDialog((Component) null, "La facture a echoue");
                     } else {
-                        //System.out.println(nomAction);
-                        final PanneauFacture panneauFacture = new PanneauFacture();
+                        PanneauFacture panneauFacture = new PanneauFacture();
                         panneauFacture.setEcouteur(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
                                 double montant = panneauFacture.getMontant();
@@ -102,12 +100,12 @@ public class EcouteurOperationsCompte implements ActionListener {
 
                             }
                         });
-                        JOptionPane.showMessageDialog((Component)null, panneauFacture, "Payer une facture", 1);
+                        JOptionPane.showMessageDialog((Component) null, panneauFacture, "Payer une facture", 1);
                     }
                     break;
                 case "HIST":
                     if (!this.client.isConnecte()) {
-                        JOptionPane.showMessageDialog((Component)null, "Demande historique échouée");
+                        JOptionPane.showMessageDialog((Component) null, "Demande historique échouée");
                     } else {
                         this.client.envoyer("HIST");
                     }

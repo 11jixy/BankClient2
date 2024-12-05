@@ -9,6 +9,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * @author Alejandro Rojas
+ */
 public class PanneauTransfert extends JPanel {
     private JTextField txtTransfert;
     private JTextField txtNumDestinataire;

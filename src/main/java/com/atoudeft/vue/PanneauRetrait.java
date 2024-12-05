@@ -7,6 +7,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * @author Alejandro Rojas
+ */
 public class PanneauRetrait extends JPanel {
     private JTextField txtRetrait = new JTextField(15);
     private JPanel panneau = new JPanel();

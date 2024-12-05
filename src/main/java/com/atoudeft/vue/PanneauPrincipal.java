@@ -13,6 +13,7 @@ import javax.swing.JDesktopPane;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
+
 public class PanneauPrincipal extends JPanel {
     private Client client;
     private PanneauConnexion panneauConnexion;

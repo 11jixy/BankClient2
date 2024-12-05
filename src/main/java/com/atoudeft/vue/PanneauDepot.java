@@ -7,6 +7,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+
+/**
+ * @author Alejandro Rojas
+ */
 public class PanneauDepot extends JPanel {
     private JTextField txtDepot = new JTextField(15);
     private JPanel panneau = new JPanel();

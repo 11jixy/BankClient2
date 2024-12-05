@@ -43,6 +43,5 @@ public class EcouteurListeComptes extends MouseAdapter {
                 }
             }
         }
-        //à compléter
     }
 }
