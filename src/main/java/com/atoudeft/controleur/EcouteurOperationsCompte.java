@@ -1,10 +1,7 @@
 package com.atoudeft.controleur;
 
 import com.atoudeft.client.Client;
-import com.atoudeft.vue.PanneauDepot;
-import com.atoudeft.vue.PanneauFacture;
-import com.atoudeft.vue.PanneauRetrait;
-import com.atoudeft.vue.PanneauTransfert;
+import com.atoudeft.vue.*;
 
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -21,14 +18,16 @@ import javax.swing.JOptionPane;
  */
 public class EcouteurOperationsCompte implements ActionListener {
     private Client client;
+    private PanneauPrincipal panneauPrincipal;
 
     /**
      * Constructeur de l'ecouteur des operations de compte
      *
      * @param client  Le client pour lequel les operations sont gerees
      */
-    public EcouteurOperationsCompte(Client client) {
+    public EcouteurOperationsCompte(Client client, PanneauPrincipal panneauPrincipal) {
         this.client = client;
+        this.panneauPrincipal = panneauPrincipal;
     }
 
     /**
@@ -52,71 +51,68 @@ public class EcouteurOperationsCompte implements ActionListener {
                     if (!this.client.isConnecte()) {
                         JOptionPane.showMessageDialog((Component) null, "Le depot a echoue");
                     } else {
-                        PanneauDepot panneauDepot = new PanneauDepot();
-                        panneauDepot.setEcouteur(new ActionListener() {
+                        panneauPrincipal.getPanneauCentral().afficherDepot(new ActionListener() {
+                            @Override
                             public void actionPerformed(ActionEvent e) {
-                                double montant = panneauDepot.getDepot();
+                                double montant = panneauPrincipal.getPanneauCentral().getMontantDepot();
                                 if (montant > 0.0) {
-                                    EcouteurOperationsCompte.this.client.envoyer("DEPOT " + montant);
+                                    client.envoyer("DEPOT " + montant);
                                 }
-
+                                panneauPrincipal.getPanneauCentral().afficherVide();
                             }
                         });
-                        JOptionPane.showMessageDialog((Component) null, panneauDepot, "Faire un dépot", 1);
                     }
                     break;
                 case "RETRAIT":
                     if (!this.client.isConnecte()) {
                         JOptionPane.showMessageDialog((Component) null, "Le retrait a echoue");
                     } else {
-                        PanneauRetrait panneauRetrait = new PanneauRetrait();
-                        panneauRetrait.setEcouteur(new ActionListener() {
+                        panneauPrincipal.getPanneauCentral().afficherRetrait(new ActionListener() {
+                            @Override
                             public void actionPerformed(ActionEvent e) {
-                                double montant = panneauRetrait.getRetrait();
+                                double montant = panneauPrincipal.getPanneauCentral().getMontantRetrait();
                                 if (montant > 0.0) {
-                                    EcouteurOperationsCompte.this.client.envoyer("RETRAIT " + montant);
+                                    client.envoyer("RETRAIT " + montant);
                                 }
-
+                                panneauPrincipal.getPanneauCentral().afficherVide();
                             }
                         });
-                        JOptionPane.showMessageDialog((Component) null, panneauRetrait, "Faire un retrait", 1);
                     }
                     break;
                 case "TRANSFER":
                     if (!this.client.isConnecte()) {
                         JOptionPane.showMessageDialog((Component) null, "Le transfert a echoue");
                     } else {
-                        PanneauTransfert panneauTransfert = new PanneauTransfert();
-                        panneauTransfert.setEcouteur(new ActionListener() {
+                        panneauPrincipal.getPanneauCentral().afficherTransfert(new ActionListener() {
+                            @Override
                             public void actionPerformed(ActionEvent e) {
-                                double montant = panneauTransfert.getTransfer();
-                                String numSource = panneauTransfert.getNumSource();
-                                String numDestinataire = panneauTransfert.getNumDestinataire();
-                                System.out.println("TRANSFER " + montant + " " + numSource + " " + numDestinataire);
-                                if (montant > 0.0 && numDestinataire != null) {
-                                    EcouteurOperationsCompte.this.client.envoyer("TRANSFER " + montant + " " + numSource + " " + numDestinataire);
+                                double montant = panneauPrincipal.getPanneauCentral().getMontantTransfert();
+                                String numDestinataire = panneauPrincipal.getPanneauCentral().getNumDestinataireTransfert();
+                                if (montant > 0.0 && numDestinataire != null && !numDestinataire.isEmpty()) {
+                                    client.envoyer("TRANSFER " + montant + " " + numDestinataire);
                                 }
+                                panneauPrincipal.getPanneauCentral().afficherVide();
                             }
                         });
-                        JOptionPane.showMessageDialog((Component) null, panneauTransfert, "Faire un transfer", 1);
                     }
                     break;
                 case "FACTURE":
                     if (!this.client.isConnecte()) {
                         JOptionPane.showMessageDialog((Component) null, "La facture a echoue");
                     } else {
-                        PanneauFacture panneauFacture = new PanneauFacture();
-                        panneauFacture.setEcouteur(new ActionListener() {
+                        panneauPrincipal.getPanneauCentral().afficherFacture(new ActionListener() {
+                            @Override
                             public void actionPerformed(ActionEvent e) {
-                                double montant = panneauFacture.getMontant();
-                                String numFacture = panneauFacture.getNumFacture();
-                                String description = panneauFacture.getDescription();
-                                if (montant > 0.0 && numFacture != null && description != null) {
-                                    EcouteurOperationsCompte.this.client.envoyer("FACTURE " + montant + " " + numFacture + " " + description);
+                                double montant = panneauPrincipal.getPanneauCentral().getMontantFacture();
+                                String numFacture = panneauPrincipal.getPanneauCentral().getNumFacture();
+                                String description = panneauPrincipal.getPanneauCentral().getDescriptionFacture();
+                                if (montant > 0.0 && numFacture != null && !numFacture.isEmpty()
+                                        && description != null && !description.isEmpty()) {
+                                    client.envoyer("FACTURE " + montant + " " + numFacture + " " + description);
                                 }
+                                panneauPrincipal.getPanneauCentral().afficherVide();
                             }
                         });
-                        JOptionPane.showMessageDialog((Component) null, panneauFacture, "Payer une facture", 1);
                     }
                     break;
                 case "HIST":

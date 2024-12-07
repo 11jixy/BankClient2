@@ -58,7 +58,9 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     if (arg.trim().startsWith("NO")) {
                         JOptionPane.showMessageDialog(this.panneauPrincipal, "Historique refusé");
                     } else {
+                        //zone de texte
                         JTextArea txt = new JTextArea(arg);
+                        //lecture seulement
                         txt.setEditable(false);
                         JScrollPane scrollPane = new JScrollPane(txt);
                         scrollPane.setPreferredSize(new Dimension(400, 300));

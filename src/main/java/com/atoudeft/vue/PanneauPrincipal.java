@@ -19,6 +19,7 @@ public class PanneauPrincipal extends JPanel {
     private PanneauConnexion panneauConnexion;
     private JPanel panneauCompteClient;
     private PanneauOperationsCompte panneauOperationsCompte;
+    private PanneauCentral panneauCentral;
     private DefaultListModel<String> numerosComptes;
     private JList<String> jlNumerosComptes;
     private JDesktopPane bureau;
@@ -26,7 +27,9 @@ public class PanneauPrincipal extends JPanel {
     public PanneauPrincipal(Client client) {
         this.client = client;
 
-        EcouteurOperationsCompte opComte = new EcouteurOperationsCompte(client);
+        this.panneauCentral = new PanneauCentral();
+
+        EcouteurOperationsCompte opComte = new EcouteurOperationsCompte(client, this);
 
         this.panneauConnexion = new PanneauConnexion();
         this.panneauConnexion.setEcouteur(new EcouteurConnexion(client, this.panneauConnexion));
@@ -47,6 +50,7 @@ public class PanneauPrincipal extends JPanel {
 
         this.panneauCompteClient.add(this.panneauOperationsCompte, "North");
         this.panneauCompteClient.add(this.jlNumerosComptes, "West");
+        this.panneauCompteClient.add(this.panneauCentral, BorderLayout.CENTER);
 
         this.jlNumerosComptes.addMouseListener(new EcouteurListeComptes(client, this.panneauOperationsCompte));
         this.setLayout(new BorderLayout());
@@ -83,7 +87,7 @@ public class PanneauPrincipal extends JPanel {
         this.numerosComptes.addElement(str);
     }
 
-    public PanneauOperationsCompte getPanneauOperationsCompte() {
-        return this.panneauOperationsCompte;
-    }
+    public PanneauOperationsCompte getPanneauOperationsCompte() { return this.panneauOperationsCompte; }
+    public PanneauCentral getPanneauCentral() { return this.panneauCentral; }
+
 }
