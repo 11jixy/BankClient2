@@ -25,31 +25,35 @@ public class PanneauPrincipal extends JPanel {
 
     public PanneauPrincipal(Client client) {
         this.client = client;
+
         EcouteurOperationsCompte opComte = new EcouteurOperationsCompte(client);
+
         this.panneauConnexion = new PanneauConnexion();
         this.panneauConnexion.setEcouteur(new EcouteurConnexion(client, this.panneauConnexion));
+
         this.panneauOperationsCompte = new PanneauOperationsCompte();
         this.panneauOperationsCompte.setEcouteur(opComte);
+
         this.panneauCompteClient = new JPanel();
         this.panneauCompteClient.setLayout(new BorderLayout());
         this.panneauCompteClient.setBackground(Color.WHITE);
         this.panneauOperationsCompte.setBackground(Color.WHITE);
+
         this.numerosComptes = new DefaultListModel();
         this.jlNumerosComptes = new JList(this.numerosComptes);
         this.jlNumerosComptes.setSelectionMode(0);
         this.jlNumerosComptes.setBorder(BorderFactory.createTitledBorder("Comptes bancaires"));
         this.jlNumerosComptes.setPreferredSize(new Dimension(250, 500));
+
         this.panneauCompteClient.add(this.panneauOperationsCompte, "North");
         this.panneauCompteClient.add(this.jlNumerosComptes, "West");
+
         this.jlNumerosComptes.addMouseListener(new EcouteurListeComptes(client, this.panneauOperationsCompte));
         this.setLayout(new BorderLayout());
         this.add(this.panneauConnexion, "North");
         this.add(this.panneauCompteClient, "Center");
-        this.panneauCompteClient.setVisible(false);
-    }
 
-    public PanneauOperationsCompte getPanneauOperationsCompte() {
-        return this.panneauOperationsCompte;
+        this.panneauCompteClient.setVisible(false);
     }
 
     public void vider() {
@@ -77,5 +81,9 @@ public class PanneauPrincipal extends JPanel {
 
     public void ajouterCompte(String str) {
         this.numerosComptes.addElement(str);
+    }
+
+    public PanneauOperationsCompte getPanneauOperationsCompte() {
+        return this.panneauOperationsCompte;
     }
 }

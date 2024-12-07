@@ -23,13 +23,16 @@ public class PanneauRetrait extends JPanel {
      * Constructeur du panneau de retrait
      */
     public PanneauRetrait() {
+
         JLabel lblDepot = new JLabel("Retrait: ");
         lblDepot.setHorizontalAlignment(4);
+
         this.btnRetrait = new JButton("Faire un retrait!");
         this.panneau.add(lblDepot);
         this.panneau.add(this.txtRetrait);
         this.panneau.add(new JLabel());
         this.panneau.add(this.btnRetrait);
+
         this.add(this.panneau);
     }
 

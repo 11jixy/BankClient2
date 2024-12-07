@@ -27,16 +27,19 @@ public class PanneauFacture extends JPanel {
      * Constructeur du panneau de facture
      */
     public PanneauFacture() {
+
         this.panneau.setLayout(new GridLayout(3, 1, 5, 5));
         this.txtMontant = new JTextField(10);
         this.txtNumFacture = new JTextField(10);
         this.txtDescription = new JTextField(20);
+
         JLabel lblMontant = new JLabel("Montant: ");
         lblMontant.setHorizontalAlignment(4);
         JLabel lblNumFacture = new JLabel("Numero de facture: ");
         lblNumFacture.setHorizontalAlignment(4);
         JLabel lblDescription = new JLabel("Description: ");
         lblDescription.setHorizontalAlignment(4);
+
         this.btnFacture = new JButton("Payer la facture!");
         this.panneau.add(lblMontant);
         this.panneau.add(this.txtMontant);
@@ -44,9 +47,11 @@ public class PanneauFacture extends JPanel {
         this.panneau.add(this.txtNumFacture);
         this.panneau.add(lblDescription);
         this.panneau.add(this.txtDescription);
+
         JPanel panneauBouton = new JPanel();
         panneauBouton.setLayout(new FlowLayout(1));
         panneauBouton.add(this.btnFacture);
+
         this.add(this.panneau, "Center");
         this.add(panneauBouton, "South");
     }

@@ -24,13 +24,16 @@ public class PanneauDepot extends JPanel {
      * Constructeur du panneau depot
      */
     public PanneauDepot() {
+
         JLabel lblDepot = new JLabel("Depot: ");
         lblDepot.setHorizontalAlignment(4);
+
         this.btnDepot = new JButton("Effectuer le dépôt!");
         this.panneau.add(lblDepot);
         this.panneau.add(this.txtDepot);
         this.panneau.add(new JLabel());
         this.panneau.add(this.btnDepot);
+
         this.add(this.panneau, "Center");
     }
 

@@ -90,12 +90,12 @@ public class EcouteurOperationsCompte implements ActionListener {
                         panneauTransfert.setEcouteur(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
                                 double montant = panneauTransfert.getTransfer();
-                                String numDestinateur = panneauTransfert.getNumDestinateur();
+                                String numSource = panneauTransfert.getNumSource();
                                 String numDestinataire = panneauTransfert.getNumDestinataire();
+                                System.out.println("TRANSFER " + montant + " " + numSource + " " + numDestinataire);
                                 if (montant > 0.0 && numDestinataire != null) {
-                                    EcouteurOperationsCompte.this.client.envoyer("TRANSFER " + montant + " " + numDestinateur + " " + numDestinataire);
+                                    EcouteurOperationsCompte.this.client.envoyer("TRANSFER " + montant + " " + numSource + " " + numDestinataire);
                                 }
-
                             }
                         });
                         JOptionPane.showMessageDialog((Component) null, panneauTransfert, "Faire un transfer", 1);

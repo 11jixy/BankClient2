@@ -106,7 +106,7 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     arg = evenement.getArgument();
                     JOptionPane.showMessageDialog(this.panneauPrincipal, "EPARGNE " + arg);
                     if (arg.trim().startsWith("NO")) {
-                        JOptionPane.showMessageDialog(this.panneauPrincipal, "Epargne refusée");
+                        JOptionPane.showMessageDialog(this.panneauPrincipal, "Vous possèdez déjà un compte épargne.");
                     } else {
                         str = arg.substring(arg.indexOf("OK") + 2).trim();
                         this.panneauPrincipal.ajouterCompte(str);
