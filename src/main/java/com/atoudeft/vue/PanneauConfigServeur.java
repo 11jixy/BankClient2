@@ -1,20 +1,25 @@
 package com.atoudeft.vue;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 /**
+ *  Panneau du configuration de serveur
  *
- * @author Abdelmoumène Toudeft (Abdelmoumene.Toudeft@etsmtl.ca)
+ * @author Jiayi Xu
  * @version 1.0
- * @since 2023-11-01
+ * @since 2024-12-06
  */
 public class PanneauConfigServeur extends JPanel {
     private JTextField txtAdrServeur, txtNumPort;
     private JPanel panneau;
 
-    //Jiayi Xu
+    /**
+     * Constructeur du panneau de configuration de serveur
+     *
+     * @param adr  Adresse IP
+     * @param port Port
+     */
     public PanneauConfigServeur(String adr, int port) {
         panneau = new JPanel();
         panneau.setLayout(new GridLayout(2, 1, 5, 5));
@@ -34,10 +39,8 @@ public class PanneauConfigServeur extends JPanel {
 
         add(panneau, BorderLayout.CENTER);
     }
-    public String getAdresseServeur() {
-        return txtAdrServeur.getText();
-    }
-    public String getPortServeur() {
-        return txtNumPort.getText();
-    }
+
+    //getters pour adresse et port
+    public String getAdresseServeur() { return txtAdrServeur.getText(); }
+    public String getPortServeur() { return txtNumPort.getText(); }
 }

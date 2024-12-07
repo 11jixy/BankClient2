@@ -8,13 +8,20 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
+ * Panneau de retrait
+ *
  * @author Alejandro Rojas
+ * @version 1.0
+ * @since 2024-12-06
  */
 public class PanneauRetrait extends JPanel {
     private JTextField txtRetrait = new JTextField(15);
     private JPanel panneau = new JPanel();
     private JButton btnRetrait;
 
+    /**
+     * Constructeur du panneau de retrait
+     */
     public PanneauRetrait() {
         JLabel lblDepot = new JLabel("Retrait: ");
         lblDepot.setHorizontalAlignment(4);
@@ -26,6 +33,10 @@ public class PanneauRetrait extends JPanel {
         this.add(this.panneau);
     }
 
+    /**
+     * Retourne le retrait tout en regardant les cas ou l'utilisateur ne rentre pas un montant valide
+     * @return le retrait en format double
+     */
     public double getRetrait() {
         try {
             return Double.parseDouble(this.txtRetrait.getText());
@@ -35,7 +46,5 @@ public class PanneauRetrait extends JPanel {
         }
     }
 
-    public void setEcouteur(ActionListener ecouteur) {
-        this.btnRetrait.addActionListener(ecouteur);
-    }
+    public void setEcouteur(ActionListener ecouteur) { this.btnRetrait.addActionListener(ecouteur); }
 }

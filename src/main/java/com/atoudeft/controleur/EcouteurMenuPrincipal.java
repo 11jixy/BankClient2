@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
+ * Ecouteur du menu principal pour gerer les clics sur les comptes dans l'interface
  *
  * @author Abdelmoumène Toudeft (Abdelmoumene.Toudeft@etsmtl.ca)
  * @version 1.0
@@ -17,11 +18,23 @@ public class EcouteurMenuPrincipal implements ActionListener {
     private Client client;
     private JFrame fenetre;
 
+    /**
+     * Constructeur de l'ecouteur du menu principal
+     *
+     * @param client  Le client pour lequel les operations du menu principal sont gerees
+     * @param fenetre La fenetre du menu principal
+     */
     public EcouteurMenuPrincipal(Client client, JFrame fenetre) {
         this.client = client;
         this.fenetre = fenetre;
     }
 
+    /**
+     * Gere les actions declenchees sur les items dans le menu
+     * (CONNECTER, DECONNECTER, CONFIGURER, QUITTER)
+     *
+     * @param evt Evenement declenche par l'utilisateur lorsqu'il interagit avec le menu principal
+     */
     @Override
     public void actionPerformed(ActionEvent evt) {
         Object source = evt.getSource();
@@ -50,7 +63,7 @@ public class EcouteurMenuPrincipal implements ActionListener {
                         client.deconnecter();
                     }
                     break;
-                    //Jiayi Xu
+                //Jiayi Xu
                 case "CONFIGURER":
                     //TODO : compléter (question 1.3)
                     boolean estValide = false;
@@ -81,7 +94,6 @@ public class EcouteurMenuPrincipal implements ActionListener {
                         }
 
                     }
-
                     break;
                 case "QUITTER":
                     if (client.isConnecte()) {

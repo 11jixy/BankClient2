@@ -9,13 +9,20 @@ import javax.swing.JTextField;
 
 
 /**
+ * Panneau du depot
+ *
  * @author Alejandro Rojas
+ * @version 1.0
+ * @since 2024-12-06
  */
 public class PanneauDepot extends JPanel {
     private JTextField txtDepot = new JTextField(15);
     private JPanel panneau = new JPanel();
     private JButton btnDepot;
 
+    /**
+     * Constructeur du panneau depot
+     */
     public PanneauDepot() {
         JLabel lblDepot = new JLabel("Depot: ");
         lblDepot.setHorizontalAlignment(4);
@@ -27,6 +34,10 @@ public class PanneauDepot extends JPanel {
         this.add(this.panneau, "Center");
     }
 
+    /**
+     * Retourne le depot tout en regardant les cas ou l'utilisateur ne rentre pas un montant valide
+     * @return le depot en format double
+     */
     public double getDepot() {
         try {
             return Double.parseDouble(this.txtDepot.getText());
@@ -35,8 +46,5 @@ public class PanneauDepot extends JPanel {
             return 0.0;
         }
     }
-
-    public void setEcouteur(ActionListener ecouteur) {
-        this.btnDepot.addActionListener(ecouteur);
-    }
+    public void setEcouteur(ActionListener ecouteur) { this.btnDepot.addActionListener(ecouteur); }
 }

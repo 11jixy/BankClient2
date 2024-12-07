@@ -10,7 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
+ * Panneau de transfert
+ *
  * @author Alejandro Rojas
+ * @version 1.0
+ * @since 2024-12-06
  */
 public class PanneauTransfert extends JPanel {
     private JTextField txtTransfert;
@@ -19,6 +23,9 @@ public class PanneauTransfert extends JPanel {
     private JPanel panneau = new JPanel();
     private JButton btnTransfert;
 
+    /**
+     * Constructeur du panneau de transfert
+     */
     public PanneauTransfert() {
         this.panneau.setLayout(new GridLayout(3, 2, 5, 5));
         this.txtTransfert = new JTextField(15);
@@ -44,6 +51,11 @@ public class PanneauTransfert extends JPanel {
         this.add(panneauBouton, "South");
     }
 
+    /**
+     * Retourne le transfert tout en regardant les cas ou l'utilisateur ne rentre pas un transfert valide
+     *
+     * @return le transfert en format double
+     */
     public double getTransfer() {
         try {
             return Double.parseDouble(this.txtTransfert.getText());
@@ -53,6 +65,11 @@ public class PanneauTransfert extends JPanel {
         }
     }
 
+    /**
+     * Retourne le num destinataire tout en regardant les cas ou l'utilisateur ne rentre pas un num destinataire
+     *
+     * @return le numero destinataire
+     */
     public String getNumDestinataire() {
         try {
             return this.txtNumDestinataire.getText();
@@ -62,6 +79,11 @@ public class PanneauTransfert extends JPanel {
         }
     }
 
+    /**
+     * Retourne le num destinateur tout en regardant les cas ou l'utilisateur ne rentre pas un numero valide
+     *
+     * @return le numero destinateur
+     */
     public String getNumDestinateur() {
         try {
             return this.txtNumDestinateur.getText();
@@ -71,7 +93,5 @@ public class PanneauTransfert extends JPanel {
         }
     }
 
-    public void setEcouteur(ActionListener ecouteur) {
-        this.btnTransfert.addActionListener(ecouteur);
-    }
+    public void setEcouteur(ActionListener ecouteur) { this.btnTransfert.addActionListener(ecouteur); }
 }

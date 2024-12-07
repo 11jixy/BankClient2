@@ -10,7 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
+ * Panneau du facture
+ *
  * @author Alejandro Rojas
+ * @version 1.0
+ * @since 2024-12-06
  */
 public class PanneauFacture extends JPanel {
     private JTextField txtMontant;
@@ -19,6 +23,9 @@ public class PanneauFacture extends JPanel {
     private JPanel panneau = new JPanel();
     private JButton btnFacture;
 
+    /**
+     * Constructeur du panneau de facture
+     */
     public PanneauFacture() {
         this.panneau.setLayout(new GridLayout(3, 1, 5, 5));
         this.txtMontant = new JTextField(10);
@@ -44,6 +51,10 @@ public class PanneauFacture extends JPanel {
         this.add(panneauBouton, "South");
     }
 
+    /**
+     * Retourne le montant tout en regardant les cas ou l'utilisateur ne rentre pas un montant valide
+     * @return le montant en format double
+     */
     public double getMontant() {
         try {
             return Double.parseDouble(this.txtMontant.getText());
@@ -53,6 +64,10 @@ public class PanneauFacture extends JPanel {
         }
     }
 
+    /**
+     * Retourne la facture tout en regardant les cas ou l'utilisateur ne rentre pas un num de facture valide
+     * @return le numero de facture
+     */
     public String getNumFacture() {
         try {
             return this.txtNumFacture.getText();
@@ -62,6 +77,10 @@ public class PanneauFacture extends JPanel {
         }
     }
 
+    /**
+     * Retourne la descrtiption tout en regardant les cas ou l'utilisateur ne rentre pas une description valide
+     * @return la description
+     */
     public String getDescription() {
         try {
             return this.txtDescription.getText();

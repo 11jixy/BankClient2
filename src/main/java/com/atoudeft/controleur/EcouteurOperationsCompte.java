@@ -12,14 +12,31 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+/**
+ * Ecouteur des operations de compte
+ *
+ * @author Alejandro Rojas
+ * @version 1.0
+ * @since 2024-12-06
+ */
 public class EcouteurOperationsCompte implements ActionListener {
     private Client client;
 
+    /**
+     * Constructeur de l'ecouteur des operations de compte
+     *
+     * @param client  Le client pour lequel les operations sont gerees
+     */
     public EcouteurOperationsCompte(Client client) {
         this.client = client;
     }
 
-    //Alejandro Rojas
+    /**
+     * Gere les actions declenchees sur les boutons des operations de compte
+     * (CONNECTER, DECONNECTER, CONFIGURER, QUITTER)
+     *
+     * @param e Evenement declenche par l'utilisateur lorsqu'il interagit avec les operations de compte
+     */
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source instanceof JButton) {
@@ -97,7 +114,6 @@ public class EcouteurOperationsCompte implements ActionListener {
                                 if (montant > 0.0 && numFacture != null && description != null) {
                                     EcouteurOperationsCompte.this.client.envoyer("FACTURE " + montant + " " + numFacture + " " + description);
                                 }
-
                             }
                         });
                         JOptionPane.showMessageDialog((Component) null, panneauFacture, "Payer une facture", 1);
@@ -111,6 +127,5 @@ public class EcouteurOperationsCompte implements ActionListener {
                     }
             }
         }
-
     }
 }

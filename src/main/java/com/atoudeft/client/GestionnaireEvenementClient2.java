@@ -10,16 +10,37 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+/**
+ * Cette classe représente un gestionnaire d'événement d'un client. Lorsqu'un client reçoit un texte d'un serveur,
+ * il crée un événement à partir du texte reçu et alerte ce gestionnaire qui réagit en gérant l'événement.
+ *
+ * @author Jiayi Xu
+ * @author Alejandro Rojas
+ * @version 1.0
+ * @since 2024-12-06
+ */
 public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
     private Client client;
     private PanneauPrincipal panneauPrincipal;
 
+    /**
+     * Construit un gestionnaire d'événements pour un client.
+     *
+     * @param client Le client pour lequel ce gestionnaire gère des événements
+     * @param panneauPrincipal Le panneau principal de l'interface utilisateur
+     */
     public GestionnaireEvenementClient2(Client client, PanneauPrincipal panneauPrincipal) {
         this.client = client;
         this.panneauPrincipal = panneauPrincipal;
         this.client.setGestionnaireEvenement(this);
     }
 
+    /**
+     * Traite les evenements reçus par le client
+     * (END, HIST, OK, NOUVEAU, CONNECT, EPARGNE, SELECT, DEPOT, RETRAIT, FACTURE, TRANSFER)
+     *
+     * @param evenement L'evenement recu par le client
+     */
     public void traiter(Evenement evenement) {
         Object source = evenement.getSource();
         if (source instanceof Connexion) {
@@ -31,14 +52,15 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                 case "END":
                     this.client.deconnecter();
                     break;
+                //Alejandro Rojas
                 case "HIST":
                     arg = evenement.getArgument();
                     if (arg.trim().startsWith("NO")) {
                         JOptionPane.showMessageDialog(this.panneauPrincipal, "Historique refusé");
                     } else {
-                        JTextArea textArea = new JTextArea(arg);
-                        textArea.setEditable(false);
-                        JScrollPane scrollPane = new JScrollPane(textArea);
+                        JTextArea txt = new JTextArea(arg);
+                        txt.setEditable(false);
+                        JScrollPane scrollPane = new JScrollPane(txt);
                         scrollPane.setPreferredSize(new Dimension(400, 300));
                         JOptionPane.showMessageDialog(this.panneauPrincipal, scrollPane, "Historique des opérations", 1);
                     }
@@ -79,6 +101,7 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
 
                         return;
                     }
+                //Jiayi Xu
                 case "EPARGNE":
                     arg = evenement.getArgument();
                     JOptionPane.showMessageDialog(this.panneauPrincipal, "EPARGNE " + arg);
@@ -90,6 +113,7 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                         JOptionPane.showMessageDialog(this.panneauPrincipal, "Compte epargne créé avec succès");
                     }
                     break;
+                //Jiayi Xu
                 case "SELECT":
                     arg = evenement.getArgument();
                     System.out.println("Réponse du serveur reçue: " + arg);
@@ -102,6 +126,7 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                         this.panneauPrincipal.getPanneauOperationsCompte().setSolde(solde);
                     }
                     break;
+                //Alejandro Rojas
                 case "DEPOT":
                     arg = evenement.getArgument();
                     JOptionPane.showMessageDialog(this.panneauPrincipal, "DEPOT " + arg);
@@ -114,6 +139,7 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                         JOptionPane.showMessageDialog(this.panneauPrincipal, "Depot effectué avec succès. \nNouveau solde: " + solde);
                     }
                     break;
+                //Alejandro Rojas
                 case "RETRAIT":
                     arg = evenement.getArgument();
                     JOptionPane.showMessageDialog(this.panneauPrincipal, "RETRAIT " + arg);
@@ -126,6 +152,7 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                         JOptionPane.showMessageDialog(this.panneauPrincipal, "Retrait effectué avec succès. \nNouveau solde: " + solde);
                     }
                     break;
+                //Alejandro Rojas
                 case "FACTURE":
                     arg = evenement.getArgument();
                     JOptionPane.showMessageDialog(this.panneauPrincipal, "FACTURE" + arg);
@@ -138,6 +165,7 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                         JOptionPane.showMessageDialog(this.panneauPrincipal, "Facture payée avec succès. \nNouveau solde: " + solde);
                     }
                     break;
+                //Alejandro Rojas
                 case "TRANSFER":
                     arg = evenement.getArgument();
                     JOptionPane.showMessageDialog(this.panneauPrincipal, "TRANSFER " + arg);
@@ -154,6 +182,5 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     System.out.println("RECU : " + evenement.getType() + " " + evenement.getArgument());
             }
         }
-
     }
 }
