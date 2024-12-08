@@ -53,6 +53,7 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     this.client.deconnecter();
                     break;
                 //Alejandro Rojas
+                //5.1
                 case "HIST":
                     arg = evenement.getArgument();
                     if (arg.trim().startsWith("NO")) {
@@ -105,11 +106,14 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     }
                 //Jiayi Xu
                 case "EPARGNE":
+                    //2.3
                     arg = evenement.getArgument();
                     JOptionPane.showMessageDialog(this.panneauPrincipal, "EPARGNE " + arg);
                     if (arg.trim().startsWith("NO")) {
+                        //a. message d'erreur si operation echoue
                         JOptionPane.showMessageDialog(this.panneauPrincipal, "Vous possèdez déjà un compte épargne.");
                     } else {
+                        //b. ajouter le numero de compte a la liste des numeros
                         str = arg.substring(arg.indexOf("OK") + 2).trim();
                         this.panneauPrincipal.ajouterCompte(str);
                         JOptionPane.showMessageDialog(this.panneauPrincipal, "Compte epargne créé avec succès");
@@ -117,6 +121,7 @@ public class GestionnaireEvenementClient2 implements GestionnaireEvenement {
                     break;
                 //Jiayi Xu
                 case "SELECT":
+                    //3.1
                     arg = evenement.getArgument();
                     System.out.println("Réponse du serveur reçue: " + arg);
                     JOptionPane.showMessageDialog(this.panneauPrincipal, "SELECT " + arg);

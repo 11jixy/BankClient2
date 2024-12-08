@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 /**
  * Voici le panneau central qui permet d'afficher ou de retirer les differents panneaux (depot, retrait, transfert, facture)
  * dans le panneau principal
+ * Question 4: Operations bancaires
  *
  * @author Alejandro Rojas
  * @version 2.0

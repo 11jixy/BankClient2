@@ -21,6 +21,7 @@ public class PanneauConfigServeur extends JPanel {
      * @param port Port
      */
     public PanneauConfigServeur(String adr, int port) {
+        //1.2
         panneau = new JPanel();
         panneau.setLayout(new GridLayout(2, 1, 5, 5));
 

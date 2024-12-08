@@ -24,6 +24,7 @@ public class EcouteurOperationsCompte implements ActionListener {
      * Constructeur de l'ecouteur des operations de compte
      *
      * @param client  Le client pour lequel les operations sont gerees
+     * @param panneauPrincipal Le panneau principal, permettant d'interagir avec celui-ci
      */
     public EcouteurOperationsCompte(Client client, PanneauPrincipal panneauPrincipal) {
         this.client = client;
@@ -40,6 +41,8 @@ public class EcouteurOperationsCompte implements ActionListener {
         Object source = e.getSource();
         if (source instanceof JButton) {
             switch (((JButton) source).getActionCommand()) {
+            //Jiayi Xu
+            //2.2 gerer le clic sur le bouton
                 case "EPARGNE":
                     if (!this.client.isConnecte()) {
                         JOptionPane.showMessageDialog((Component) null, "L'operation a echoue");
@@ -57,6 +60,7 @@ public class EcouteurOperationsCompte implements ActionListener {
                                 double montant = panneauPrincipal.getPanneauCentral().getMontantDepot();
                                 if (montant > 0.0) {
                                     client.envoyer("DEPOT " + montant);
+                                    System.out.println("DEPOT " + montant);
                                 }
                                 panneauPrincipal.getPanneauCentral().afficherVide();
                             }
@@ -115,6 +119,7 @@ public class EcouteurOperationsCompte implements ActionListener {
                         });
                     }
                     break;
+                //5.1
                 case "HIST":
                     if (!this.client.isConnecte()) {
                         JOptionPane.showMessageDialog((Component) null, "Demande historique échouée");

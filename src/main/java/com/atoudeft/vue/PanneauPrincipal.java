@@ -29,12 +29,14 @@ public class PanneauPrincipal extends JPanel {
 
         this.panneauCentral = new PanneauCentral();
 
+        //2.1
         EcouteurOperationsCompte opComte = new EcouteurOperationsCompte(client, this);
 
         this.panneauConnexion = new PanneauConnexion();
         this.panneauConnexion.setEcouteur(new EcouteurConnexion(client, this.panneauConnexion));
 
         this.panneauOperationsCompte = new PanneauOperationsCompte();
+        //2.1
         this.panneauOperationsCompte.setEcouteur(opComte);
 
         this.panneauCompteClient = new JPanel();

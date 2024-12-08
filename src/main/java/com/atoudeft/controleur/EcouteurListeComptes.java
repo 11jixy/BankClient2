@@ -36,6 +36,7 @@ public class EcouteurListeComptes extends MouseAdapter {
      */
     @Override
     public void mouseClicked(MouseEvent evt) {
+        //3.1
        Object source = evt.getSource();
         JList liste = (JList) source;
         String action;
