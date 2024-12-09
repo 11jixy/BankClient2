@@ -51,9 +51,8 @@ public class EcouteurOperationsCompte implements ActionListener {
                             double montant = panneauPrincipal.getPanneauCentral().getMontantDepot();
                             if (montant > 0.0) {
                                 client.envoyer("DEPOT " + montant);
-                                System.out.println("DEPOT " + montant);
                             }
-                            panneauPrincipal.getPanneauCentral().afficherVide();
+                            //panneauPrincipal.getPanneauCentral().afficherVide();
                         }
                     });
                     break;
@@ -65,7 +64,7 @@ public class EcouteurOperationsCompte implements ActionListener {
                             if (montant > 0.0) {
                                 client.envoyer("RETRAIT " + montant);
                             }
-                            panneauPrincipal.getPanneauCentral().afficherVide();
+                            //panneauPrincipal.getPanneauCentral().afficherVide();
                         }
                     });
                     break;
@@ -78,7 +77,7 @@ public class EcouteurOperationsCompte implements ActionListener {
                             if (montant > 0.0 && numDestinataire != null && !numDestinataire.isEmpty()) {
                                 client.envoyer("TRANSFER " + montant + " " + numDestinataire);
                             }
-                            panneauPrincipal.getPanneauCentral().afficherVide();
+                            //panneauPrincipal.getPanneauCentral().afficherVide();
                         }
                     });
                     break;
@@ -93,7 +92,7 @@ public class EcouteurOperationsCompte implements ActionListener {
                                     && description != null && !description.isEmpty()) {
                                 client.envoyer("FACTURE " + montant + " " + numFacture + " " + description);
                             }
-                            panneauPrincipal.getPanneauCentral().afficherVide();
+                            //panneauPrincipal.getPanneauCentral().afficherVide();
                         }
                     });
                     break;
